@@ -3,6 +3,9 @@ from manim import *
 from style import *
 from manim_fonts import * 
 
+def watermark():
+    return Text("Compsyc", color=LIGHT_PINK, weight="BOLD", font=FONT, font_size=160).set_fill(opacity=0.01).set_z_index(-100)
+
 def show_title(text, up_mobject=None, title_scale=0.25):
     t, animation1, animation2 = None, None, None
     if not up_mobject:
@@ -21,6 +24,17 @@ def show_title_end(title_group, scale_value=1.5):
     new_title_group = title_group.copy().move_to(ORIGIN).scale(scale_value).set_color(GRAY)
     box = SurroundingRectangle(new_title_group, color=PINK2, buff=0.5, stroke_width=SM_STROKE_WIDTH)
     return new_title_group, box
+
+def show_example(title_mobject):
+    box = SurroundingRectangle(title_mobject, color=GRAY, stroke_width=SM_STROKE_WIDTH-2)
+    box2 = SurroundingRectangle(box, color=GRAY, stroke_width=SM_STROKE_WIDTH-1)
+    double_box = VGroup(box, box2)
+    eg = get_text("例子", EXAMPLE_SIZE).move_to(box2.get_center())
+    
+    animation1 = Create(double_box)
+    animation2 = AnimationGroup(FadeOut(double_box, title_mobject), FadeIn(eg))
+    animation3 = AnimationGroup(FadeIn(double_box, title_mobject), FadeOut(eg))
+    return double_box, [animation1, animation2, Wait(0.5), animation3]
 
 def highlight_node(mobject, secondary=False):
     # Highlight node to dark pink

@@ -2,6 +2,7 @@ from turtle import circle
 from manim import *
 from style import *
 from manim_fonts import *
+from util import *
 
 RADIUS = 0.4
 SM_RADIUS = 0.35
@@ -17,13 +18,25 @@ TITLE_SIZE = 80
 KARLA_PATH = "/Users/joyliu/Desktop/Joy/Github/compsych/heap/font/Karla/Karla-Regular.ttf"
 FONT = "Karla"
 
+TEST_CODE = """EXTRACT-FIRST(A) {
+    heapsize = length(A)
+    Exchange A[1] with A[heapsize]
+    Remove A[heapsize]
+    HeapifyDown(A, 1)
+    heapsize = length(A)
+    Exchange A[1] with A[heapsize]
+    Remove A[heapsize]
+    HeapifyDown(A, 1)
+    heapsize = length(A)
+    Exchange A[1] with A[heapsize]
+    Remove A[heapsize]
+    HeapifyDown(A, 1)
+}
+"""
 
-class Heap(Scene):
+
+class Test(Scene):
     def construct(self):
         self.camera.background_color = BACKGROUND
-        friend = Paragraph("""
-        你
-        朋
-        友
-        """)
-        self.add(friend)
+        code = Code(code=TEST_CODE, stroke_width=1, line_spacing=CODE_LINE_SPACING, font=CODE_FONT, background="rectangle", margin=0, background_stroke_width=0, tab_width=2, language="Python", font_size=16).shift(SHIFT_LEFT_UNIT * LEFT)
+        self.add(code)
