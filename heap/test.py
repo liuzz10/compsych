@@ -38,5 +38,5 @@ TEST_CODE = """EXTRACT-FIRST(A) {
 class Test(Scene):
     def construct(self):
         self.camera.background_color = BACKGROUND
-        code = Code(code=TEST_CODE, stroke_width=1, line_spacing=CODE_LINE_SPACING, font=CODE_FONT, background="rectangle", margin=0, background_stroke_width=0, tab_width=2, language="Python", font_size=16).shift(SHIFT_LEFT_UNIT * LEFT)
-        self.add(code)
+        ch1 = ImageMobject("red.svg")
+        self.play(FadeIn(ch1))

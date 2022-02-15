@@ -11,7 +11,7 @@ from util import *
 # Zindex: line 0, circle 1, description text 2
 
 
-class HeapOperation(Scene):
+class Show(Scene):
     def _color(self, node, is_delete):
         """
         Color a node to highlight
@@ -161,22 +161,18 @@ class HeapOperation(Scene):
 
 
     def construct(self):
-        """
-        Main function called by manim
-        command is a list of string
-        """
         self.camera.background_color = BACKGROUND
         self.add(watermark())
 
-        build_heap_title = get_text_2line("建堆", "build_heap(A)", SECONDARY_TITLE_SIZE, SECONDARY_TITLE_SIZE-20).scale(0.7)
-        heapify_title = get_text_2line("堆化", "heapify(i)", SECONDARY_TITLE_SIZE, SECONDARY_TITLE_SIZE-20).scale(0.7).next_to(build_heap_title, DOWN, buff=1.3)
+        build_heap_title = get_text("build_heap(A)", SECONDARY_TITLE_SIZE-20).scale(1)
+        heapify_title = get_text("heapify(i)", SECONDARY_TITLE_SIZE-20).scale(1).next_to(build_heap_title, DOWN, buff=1.3)
         heapify_title.set_fill(GRAY)
         build_arrow_title = Line(heapify_title.get_top(), build_heap_title.get_bottom(), buff=0.2, stroke_width=5).add_tip(tip_length=0.3)
         title_group = VGroup(build_heap_title, heapify_title, build_arrow_title).scale(0.5).to_edge(UL, buff=0.8).shift(0.2 * UP)
         self.add(title_group)
         self.wait()
 
-        double_box, animations = show_example(title_group)
+        double_box, animations = show_example(title_group, False)
         for a in animations:
             self.play(a)
 
@@ -187,7 +183,7 @@ class HeapOperation(Scene):
         self.play(heap.show(), run_time=3)
         self.wait()
 
-        text = get_text("最小堆", TEXT_SIZE).next_to(heap.tree, RIGHT, buff=1)
+        text = get_text("Min heap", TEXT_SIZE).next_to(heap.tree, RIGHT, buff=1)
         arrow = Line(heap.tree.get_right(), text.get_left(), buff=0.2, stroke_width=5).add_tip(tip_length=0.2)
         question_mark = get_text("?", TEXT_SIZE).next_to(arrow, UP, buff=0.1).shift(0.3*RIGHT)
         text.shift(0.6*RIGHT)

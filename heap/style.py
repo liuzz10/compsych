@@ -18,6 +18,7 @@ FONT = "Karla"
 
 
 RADIUS = 0.35    # For node
+SM_TEXT_SIZE = 20
 TEXT_SIZE = 30  # Normal h3 small text on screen
 LG_TEXT_SIZE = 40   # For p1 large text/questions on screen next to a graph
 LINE_SPACING = 0.3  # For large text/questions on screen next to a graph

@@ -10,7 +10,7 @@ def show_title(text, up_mobject=None, title_scale=0.25):
     t, animation1, animation2 = None, None, None
     if not up_mobject:
         # The Title
-        t = Paragraph(text, color=GRAY, font=FONT, weight="BOLD", font_size=TITLE_SIZE)
+        t = Paragraph(*text, color=GRAY, font=FONT, weight="BOLD", font_size=TITLE_SIZE)
         animation1 = Write(t)
         animation2 = t.animate.scale(title_scale).set_color(GRAY_OUT).to_edge(UL, buff=0.8).shift(0.2 * UP)
     else:
@@ -25,12 +25,15 @@ def show_title_end(title_group, scale_value=1.5):
     box = SurroundingRectangle(new_title_group, color=PINK2, buff=0.5, stroke_width=SM_STROKE_WIDTH)
     return new_title_group, box
 
-def show_example(title_mobject):
+def show_example(title_mobject, chinese=True):
     box = SurroundingRectangle(title_mobject, color=GRAY, stroke_width=SM_STROKE_WIDTH-2)
     box2 = SurroundingRectangle(box, color=GRAY, stroke_width=SM_STROKE_WIDTH-1)
     double_box = VGroup(box, box2)
-    eg = get_text("例子", EXAMPLE_SIZE).move_to(box2.get_center())
-    
+    eg = None
+    if chinese:
+        eg = get_text("例子", EXAMPLE_SIZE).move_to(box2.get_center())
+    else:
+        eg = get_text("Example", EXAMPLE_SIZE-3).move_to(box2.get_center())
     animation1 = Create(double_box)
     animation2 = AnimationGroup(FadeOut(double_box, title_mobject), FadeIn(eg))
     animation3 = AnimationGroup(FadeIn(double_box, title_mobject), FadeOut(eg))
